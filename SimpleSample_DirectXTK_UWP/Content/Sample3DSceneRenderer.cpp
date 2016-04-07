@@ -279,7 +279,7 @@ void Sample3DSceneRenderer::Render()
 
 	//Drawing walls
 
-	for (auto wall : wallsVector)
+	for (auto& wall : wallsVector)
 	{
 		wall.Draw(m_sprites.get());
 	}
@@ -368,7 +368,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 	//auto loadVSTask = DX::ReadDataAsync(L"SampleVertexShader.cso");
 	//auto loadPSTask = DX::ReadDataAsync(L"SamplePixelShader.cso");
 
-	//// After the vertex shader file is loaded, create the shader and input layout.
+	// After the vertex shader file is loaded, create the shader and input layout.
 	//auto createVSTask = loadVSTask.then([this](const std::vector<byte>& fileData) {
 	//	DX::ThrowIfFailed(
 	//		m_deviceResources->GetD3DDevice()->CreateVertexShader(
