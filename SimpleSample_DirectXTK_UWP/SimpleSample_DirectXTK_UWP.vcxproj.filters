@@ -104,6 +104,27 @@
     <Image Include="Assets\StoreLogo.png">
       <Filter>Assets</Filter>
     </Image>
+    <Image Include="Assets\background.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\cloud.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\shipanimated.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\clouds2.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\enemyanimated.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\clouds.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\pipe.dds">
+      <Filter>Assets</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -111,5 +132,16 @@
   <ItemGroup>
     <None Include="SimpleSample_DirectXTK_UWP_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <None Include="Assets\italic.spritefont">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\ADPCMdroid.xwb">
+      <Filter>Assets</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\musicmono_adpcm.wav">
+      <Filter>Assets</Filter>
+    </Media>
   </ItemGroup>
 </Project>

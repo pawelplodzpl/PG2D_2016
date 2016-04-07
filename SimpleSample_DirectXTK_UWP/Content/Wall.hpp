@@ -7,7 +7,7 @@
 #include <SpriteBatch.h>
 
 #include <DirectXMath.h>
-#include <DirectXTK\Inc\SimpleMath.h>
+#include <SimpleMath.h>
 
 #include <random>
 

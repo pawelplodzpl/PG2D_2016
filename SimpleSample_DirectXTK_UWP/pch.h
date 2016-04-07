@@ -16,3 +16,5 @@
 #include <concrt.h>
 #include <ppl.h>
 #include <unordered_map>
+#include <vector>
+#include <future>
