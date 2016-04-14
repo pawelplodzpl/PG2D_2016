@@ -215,6 +215,8 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 #pragma region Collisions
 	collisionString = L"There is no collision";
 	gamePad->SetVibration(0, 0.f, 0.f);
+	
+	// Collisions of Player with walls
 	for (auto wallsIterator = wallsVector.begin(); wallsIterator < wallsVector.end(); wallsIterator++)
 	{
 
@@ -225,6 +227,15 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 			gamePad->SetVibration(0, 0.75f, 0.75f);
 		}
 	}
+
+	//Collisions of Enemies with Player
+
+
+	//Collisions with Enemies with Walls
+
+
+
+
 #pragma endregion Handling collision detection + simple GamePad rumble on crash
 
 }
