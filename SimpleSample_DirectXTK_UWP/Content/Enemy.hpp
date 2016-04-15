@@ -20,7 +20,7 @@
 class Enemy
 {
 public:
-	Enemy(ID3D11ShaderResourceView* enemySpriteSheet) : framesOfAnimation(4), framesToBeShownPerSecond(4)
+	Enemy(ID3D11ShaderResourceView* enemySpriteSheet) : framesOfAnimation{ 4 }, framesToBeShownPerSecond{ 4 }, visible{ true }, flightSpeed {0}
 	{
 		position = DirectX::XMFLOAT2(512, 512);
 
@@ -60,6 +60,39 @@ public:
 		return position;
 	}
 
+	bool isVisible()
+	{
+		return this->visible;
+	}
+	void setVisibility(bool visibility)
+	{
+		this->visible = visibility;
+	}
+
+	void setFlightSpeed(int speed)
+	{
+		this->flightSpeed = speed;
+	}
+
+	int getFlightSpeed()
+	{
+		return this->flightSpeed;
+	}
+
+
+
+	bool isCollidingWith(Windows::Foundation::Rect rect)
+	{
+		if (rectangle.IntersectsWith(rect))
+		{
+			return true;
+		}
+
+		else
+		{
+			return false;
+		}
+	}
 
 	void Update(float elapsed)
 	{
@@ -92,6 +125,8 @@ private:
 	int													textureHeight;
 	int													framesOfAnimation;
 	int													framesToBeShownPerSecond;
+	bool												visible;
+	int													flightSpeed;
 
 	//Texture and animation
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>	texture;

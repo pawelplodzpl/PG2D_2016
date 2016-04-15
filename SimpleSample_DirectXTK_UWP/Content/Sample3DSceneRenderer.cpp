@@ -99,7 +99,7 @@ void Sample3DSceneRenderer::CreateAudioResources()
 	//m_effect2->Play();
 }
 
-// Called once per frame, rotates the cube and calculates the model and view matrices.
+// Called once per frame
 void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 {
 	//if (!m_tracking)
@@ -141,6 +141,35 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 	//	m_audioTimerAcc = 1.f;
 	//	m_retryDefault = true;
 	//}
+	auto windowSize = m_deviceResources->GetOutputSize(); // physical screen resolution
+	auto logicalSize = m_deviceResources->GetLogicalSize(); //DPI dependent resolution
+
+
+
+#pragma region Handling Adding Enemies
+
+	//Enemy enemyTemp(enemyTexture.Get());
+	//enemiesVector.push_back(enemyTemp);
+
+	if (enemiesVector.size() < 5)
+	{
+		std::random_device rd;
+		std::default_random_engine random(rd());
+
+		std::uniform_int_distribution<int> dist(0, (int)windowSize.Height); //Choose distribution of the result (inclusive,inclusive)
+		std::uniform_int_distribution<int> dist2(5, 25); //Choose distribution of the result (inclusive,inclusive)
+
+		Enemy enemyTemp(enemyTexture.Get());
+		XMFLOAT2 tempPos{ 0,0 };
+		tempPos.x = windowSize.Width;
+		tempPos.y = dist(random);
+		enemyTemp.setFlightSpeed(dist2(random));
+		enemyTemp.setPosition(tempPos);
+		enemiesVector.push_back(enemyTemp);
+	}
+
+#pragma endregion
+
 
 #pragma region Gamepad
 	//GamePad
@@ -180,20 +209,42 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 	//animation->Update((float)timer.GetElapsedSeconds());
 	player->Update((float)timer.GetElapsedSeconds());
 
-#pragma region Enemy AI
+
+
+#pragma	region Updating Enemies without AI
+	for (auto & enemy : enemiesVector)
+	{
+		
+		XMFLOAT2 tempPos = enemy.getPosition();
+		tempPos.x -= enemy.getFlightSpeed(); //CHANGE TO PROPER POSITIONING USING TIME
+		enemy.setPosition(tempPos);
+		if (tempPos.x < 0)
+		{
+			enemy.setVisibility(false);
+		}
+
+	}
+
+#pragma endregion
+
+
+
+#pragma region Updating Enemies with AI
 	// TODO: handle enemy AI using promises and Lambdas
 	std::vector<std::future<DirectX::XMFLOAT2>> futures;
 
-	for (auto enemy : enemiesVector)
+	for (auto& enemy : enemiesVector)
 	{
 		futures.push_back(std::async(std::launch::async,
-			[]()
+			[&]()
 		{
-			DirectX::XMFLOAT2 tempPos{ 0,0 };
+			
+			Enemy & currentEnemy = enemy;
+			DirectX::XMFLOAT2 enemyPos{ 0,0 };
+			DirectX::XMFLOAT2 playerPos = player->getPosition();
 			//TODO: Write code for very complicated AI here
 
-
-			return tempPos;
+			return enemyPos;
 
 		}));
 	}
@@ -211,6 +262,9 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 	}
 
 #pragma endregion Handling Enemy AI using std::async and std::Future. Also using C++11 Lambdas
+
+
+
 
 #pragma region Collisions
 	collisionString = L"There is no collision";
@@ -230,6 +284,15 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 
 	//Collisions of Enemies with Player
 
+	for (auto &enemy : enemiesVector)
+	{
+		if (enemy.isCollidingWith(player->rectangle))
+		{
+			enemy.setVisibility (false);
+		}
+
+	}
+
 
 	//Collisions with Enemies with Walls
 
@@ -237,6 +300,26 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 
 
 #pragma endregion Handling collision detection + simple GamePad rumble on crash
+	
+#pragma region	Final update for enemies
+
+	for (auto it = enemiesVector.begin(); it < enemiesVector.end();)
+	{
+		if (it->isVisible() == false)
+		{
+			it = enemiesVector.erase(it);
+		}
+		else
+		{
+			it->Update((float)timer.GetElapsedSeconds());
+			it++;
+		}
+
+	}
+#pragma endregion
+
+
+
 
 }
 
@@ -299,6 +382,13 @@ void Sample3DSceneRenderer::Render()
 	//wall2->Draw(m_sprites.get());
 	player->Draw(m_sprites.get());
 
+	for (auto& enemy : enemiesVector)
+	{
+		enemy.Draw(m_sprites.get());
+
+	}
+
+
 	clouds2->Draw(m_sprites.get());
 
 	m_font->DrawString(m_sprites.get(), collisionString.c_str(), XMFLOAT2(100, 10), Colors::Yellow);
@@ -353,9 +443,13 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 	DX::ThrowIfFailed(
 		CreateDDSTextureFromFile(device, L"Assets\\enemyanimated.dds", nullptr, enemyTexture.ReleaseAndGetAddressOf())
 		);
+	
+	
 	//TODO: Instatiate enemies here
-	Enemy enemyTemp(enemyTexture.Get());
-	enemiesVector.push_back(enemyTemp);
+	//Enemy enemyTemp(enemyTexture.Get());
+	//enemiesVector.push_back(enemyTemp);
+
+
 
 	DX::ThrowIfFailed(
 		CreateDDSTextureFromFile(device, L"Assets\\pipe.dds", nullptr, pipeTexture.ReleaseAndGetAddressOf())
