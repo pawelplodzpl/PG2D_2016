@@ -195,6 +195,46 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 	}
 #pragma endregion Handling the Gamepad Input
 
+
+#pragma region Keyboard
+	std::unique_ptr<Keyboard::KeyboardStateTracker> tracker(new Keyboard::KeyboardStateTracker);
+
+
+
+	auto keyboardState = Keyboard::Get().GetState();
+
+	tracker->Update(keyboardState);
+	XMFLOAT2 tempPos = player->getPosition();
+	if (tracker->pressed.S)
+	{
+
+		tempPos.y += 10;
+	}
+
+	if (tracker->pressed.W)
+	{
+
+		tempPos.y -= 10;
+	}
+
+	if (tracker->pressed.A)
+	{
+		tempPos.x -= 10;
+	}
+	if (tracker->pressed.D)
+	{
+		tempPos.x += 10;
+	}
+
+
+	player->setPosition(tempPos);
+
+
+#pragma endregion Handling Keyboard input
+
+
+
+
 #pragma region Paralaxing background
 	//Update Background
 	background->Update((float)timer.GetElapsedSeconds() * 100);

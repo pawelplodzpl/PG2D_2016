@@ -11,6 +11,8 @@
 #include "SimpleMath.h"
 #include "Audio.h"
 #include "GamePad.h"
+#include "Keyboard.h"
+#include "Mouse.h"
 
 
 #include "..\Common\DeviceResources.h"

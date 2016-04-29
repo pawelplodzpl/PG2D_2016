@@ -3,6 +3,8 @@
 #include "pch.h"
 #include "Common\DeviceResources.h"
 #include "SimpleSample_DirectXTK_UWPMain.h"
+#include "Keyboard.h"
+
 
 namespace SimpleSample_DirectXTK_UWP
 {
@@ -40,6 +42,9 @@ namespace SimpleSample_DirectXTK_UWP
 		std::unique_ptr<SimpleSample_DirectXTK_UWPMain> m_main;
 		bool m_windowClosed;
 		bool m_windowVisible;
+
+		std::unique_ptr<Keyboard>   keyboardPointer;
+
 	};
 }
 
