@@ -488,10 +488,10 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		CreateWICTextureFromFile(device, L"Assets\\ships-0.png", nullptr, ships1Texture.ReleaseAndGetAddressOf())
 		);
 	DX::ThrowIfFailed(
-		CreateDDSTextureFromFile(device, L"Assets\\ships-1.png", nullptr, ships2Texture.ReleaseAndGetAddressOf())
+		CreateWICTextureFromFile(device, L"Assets\\ships-1.png", nullptr, ships2Texture.ReleaseAndGetAddressOf())
 		);
 	DX::ThrowIfFailed(
-		CreateDDSTextureFromFile(device, L"Assets\\nebulas.png", nullptr, nebulasTexture.ReleaseAndGetAddressOf())
+		CreateWICTextureFromFile(device, L"Assets\\nebulas.png", nullptr, nebulasTexture.ReleaseAndGetAddressOf())
 		);
 	
 
