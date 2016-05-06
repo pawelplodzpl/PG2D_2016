@@ -19,6 +19,9 @@
 //#include "ShaderStructures.h"
 #include "..\Common\StepTimer.h"
 
+#include "DDSTextureLoader.h"
+#include "WICTextureLoader.h"
+
 namespace SimpleSample_DirectXTK_UWP
 {
 	// This sample renderer instantiates a basic rendering pipeline.
@@ -93,6 +96,11 @@ namespace SimpleSample_DirectXTK_UWP
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>						cloudsTexture2;
 		std::unique_ptr<ScrollingBackground>									clouds2;
 		std::unique_ptr<Player>													player;
+
+		//SpriteSheets
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>						ships1Texture;
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>						ships2Texture;
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>						nebulasTexture;
 
 		std::unique_ptr<GamePad>												gamePad;
 		std::vector<Wall>														wallsVector;

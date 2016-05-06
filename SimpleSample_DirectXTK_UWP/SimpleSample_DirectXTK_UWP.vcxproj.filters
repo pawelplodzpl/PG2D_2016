@@ -99,6 +99,9 @@
     <ClInclude Include="Content\Enemy.hpp">
       <Filter>Content</Filter>
     </ClInclude>
+    <ClInclude Include="Common\SpriteSheet.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\StoreLogo.png">
@@ -125,6 +128,18 @@
     <Image Include="Assets\pipe.dds">
       <Filter>Assets</Filter>
     </Image>
+    <Image Include="Assets\nebulas.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\ships-0.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\ships-1.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SmallLogo.dds">
+      <Filter>Assets</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -138,10 +153,27 @@
     <None Include="Assets\ADPCMdroid.xwb">
       <Filter>Assets</Filter>
     </None>
+    <None Include="Assets\nebulas.cs">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\ships-1.cs">
+      <Filter>Assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Assets\musicmono_adpcm.wav">
       <Filter>Assets</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\nebulas.txt">
+      <Filter>Assets</Filter>
+    </Text>
+    <Text Include="Assets\ships-0.txt">
+      <Filter>Assets</Filter>
+    </Text>
+    <Text Include="Assets\ships-1.txt">
+      <Filter>Assets</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 ﻿#include "pch.h"
 #include "Sample3DSceneRenderer.h"
-#include "DDSTextureLoader.h"
+
 
 
 #include "..\Common\DirectXHelper.h"
@@ -484,11 +484,16 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		CreateDDSTextureFromFile(device, L"Assets\\enemyanimated.dds", nullptr, enemyTexture.ReleaseAndGetAddressOf())
 		);
 	
+	DX::ThrowIfFailed(
+		CreateWICTextureFromFile(device, L"Assets\\ships-0.png", nullptr, ships1Texture.ReleaseAndGetAddressOf())
+		);
+	DX::ThrowIfFailed(
+		CreateDDSTextureFromFile(device, L"Assets\\ships-1.png", nullptr, ships2Texture.ReleaseAndGetAddressOf())
+		);
+	DX::ThrowIfFailed(
+		CreateDDSTextureFromFile(device, L"Assets\\nebulas.png", nullptr, nebulasTexture.ReleaseAndGetAddressOf())
+		);
 	
-	//TODO: Instatiate enemies here
-	//Enemy enemyTemp(enemyTexture.Get());
-	//enemiesVector.push_back(enemyTemp);
-
 
 
 	DX::ThrowIfFailed(
